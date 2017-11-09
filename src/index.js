@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // on ready
   });
 
-  componentManager.loggingEnabled = true;
+  // componentManager.loggingEnabled = true;
 
   componentManager.streamContextItem((note) => {
     workingNote = note;

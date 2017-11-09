@@ -15,7 +15,7 @@ body, html {
 }
 
 #column-resizer {
-  width: 13px;
+  width: 10px;
   background-color: rgb(228, 228, 228);
   position: absolute;
   left: 50%;
@@ -32,7 +32,6 @@ body, html {
   outline: 0;
   resize: none;
   padding: 12px;
-  padding-top: 25px;
   background-color: transparent;
 }
 
@@ -40,9 +39,15 @@ body, html {
   width: calc(50% - 20px);
   height: 100%;
   padding: 10px;
-  padding-left: 20px;
+  padding-top: 0;
+  padding-left: 16px;
   overflow: scroll;
   flex: 1;
+  word-wrap: break-word;
+}
+
+#preview *:first-child {
+  margin-top: 12px;
 }
 
 .dragging {
