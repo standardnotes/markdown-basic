@@ -1,6 +1,6 @@
 {
   "name": "sn-simple-markdown-editor",
-  "version": "1.0.1",
+  "version": "1.0.11",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "markdown-it": "^8.4.0",
     "markdown-it-footnote": "^3.0.1",
     "markdown-it-task-lists": "^2.1.0",
-    "sn-components-api": "^1.0.12"
+    "sn-components-api": "^1.0.13"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
