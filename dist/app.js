@@ -37,9 +37,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var text = updatePreviewText();
     if (workingNote) {
       workingNote.content.text = text;
-      componentManager.replacePendingAndPerformAfterDelay(function () {
-        componentManager.saveItem(workingNote);
-      });
+      componentManager.saveItem(workingNote);
     }
   });
 
