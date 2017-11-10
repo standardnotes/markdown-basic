@@ -1,6 +1,6 @@
 {
   "name": "simple-markdown-editor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "markdown-it": "^8.4.0",
     "markdown-it-footnote": "^3.0.1",
     "markdown-it-task-lists": "^2.1.0",
-    "sn-components-api": "^1.0.11"
+    "sn-components-api": "^1.0.12"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -24,6 +24,9 @@
     "grunt-babel": "^6.0.0",
     "grunt-browserify": "^5.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-newer": "^1.2.0"
+    "grunt-newer": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0"
   }
 }
