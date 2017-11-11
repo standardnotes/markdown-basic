@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   componentManager.streamContextItem((note) => {
     workingNote = note;
+    if(note.isMetadataUpdate) {
+      return;
+    }
     editor.value = note.content.text;
     preview.innerHTML = md.render(note.content.text);
   });
