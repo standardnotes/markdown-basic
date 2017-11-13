@@ -413,9 +413,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   componentManager.streamContextItem(function (note) {
     workingNote = note;
+
+    // Only update UI on non-metadata updates.
     if (note.isMetadataUpdate) {
       return;
     }
+
     editor.value = note.content.text;
     preview.innerHTML = md.render(note.content.text);
   });
