@@ -1,4 +1,5 @@
 node_modules
+.sass-cache
 
 dist/lib.js
 dist/app.js
