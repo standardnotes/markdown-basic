@@ -5,7 +5,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
     return;
   }
 
-  const md = window.markdownit().use(window.markdownitFootnote).use(window.markdownitTaskLists);
+  var mardownitOptions = {
+      // automatically render raw links as anchors.
+      linkify: true
+  };
+
+  const md = window.markdownit(markdownitOptions)
+    .use(window.markdownitFootnote)
+    .use(window.markdownitTaskLists);
 
   var editor = document.getElementById("editor");
   var preview = document.getElementById("preview");
@@ -31,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     if(note.isMetadataUpdate) {
       return;
     }
-    
+
     editor.value = note.content.text;
     preview.innerHTML = md.render(note.content.text);
   });
