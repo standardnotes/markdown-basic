@@ -8,7 +8,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
     return;
   }
 
-  var md = window.markdownit().use(window.markdownitFootnote).use(window.markdownitTaskLists);
+  var mardownitOptions = {
+    // automatically render raw links as anchors.
+    linkify: true
+  };
+
+  var md = window.markdownit(markdownitOptions).use(window.markdownitFootnote).use(window.markdownitTaskLists);
 
   var editor = document.getElementById("editor");
   var preview = document.getElementById("preview");
