@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     return;
   }
 
-  var mardownitOptions = {
+  var markdownitOptions = {
       // automatically render raw links as anchors.
       linkify: true
   };
