@@ -1,6 +1,6 @@
 {
   "name": "sn-simple-markdown-editor",
-  "version": "1.0.153",
+  "version": "1.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "sn-components-api": "^1.0.242",
+    "sn-components-api": "1.1.0",
     "highlight.js": "^9.12.0",
     "markdown-it": "^8.4.0",
     "markdown-it-footnote": "^3.0.1",
