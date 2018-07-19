@@ -23,6 +23,7 @@ $border-color: rgb(228, 228, 228);
   flex-grow: 1;
   display: flex;
   flex-direction: row;
+  overflow: hidden; // required for footer bar to display in Firefox
 }
 
 #editor {
