@@ -91,6 +91,25 @@ export default class Home extends React.Component {
       .use(require('markdown-it-footnote'))
       .use(require('markdown-it-task-lists'))
       .use(markdownItHighlight);
+
+      // Remember old renderer, if overriden, or proxy to default renderer
+      var defaultRender = this.markdown.renderer.rules.link_open || function(tokens, idx, options, env, self) {
+        return self.renderToken(tokens, idx, options);
+      };
+
+      this.markdown.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+        // If you are sure other plugins can't add `target` - drop check below
+        var aIndex = tokens[idx].attrIndex('target');
+
+        if (aIndex < 0) {
+          tokens[idx].attrPush(['target', '_blank']); // add new attribute
+        } else {
+          tokens[idx].attrs[aIndex][1] = '_blank';    // replace value of existing attr
+        }
+
+        // pass token to default renderer.
+        return defaultRender(tokens, idx, options, env, self);
+      };
   }
 
   connectToBridge() {
