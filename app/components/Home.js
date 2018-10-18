@@ -142,6 +142,17 @@ export default class Home extends React.Component {
 
   }
 
+  truncateString(string, limit = 80) {
+    if(!string) {
+      return null;
+    }
+    if(string.length <= limit) {
+      return string;
+    } else {
+      return string.substring(0, limit) + "...";
+    }
+  }
+
   updatePreviewText() {
     var text = this.editor.value || "";
     this.preview.innerHTML = this.markdown.render(text);
@@ -153,6 +164,7 @@ export default class Home extends React.Component {
       var text = this.updatePreviewText();
       if(this.note) {
         this.note.content.text = text;
+        this.note.content.preview_plain = this.truncateString(this.preview.textContent || this.preview.innerText);
         this.componentManager.saveItem(this.note);
       }
     })
