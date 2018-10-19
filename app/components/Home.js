@@ -164,8 +164,11 @@ export default class Home extends React.Component {
       var text = this.updatePreviewText();
       if(this.note) {
         this.note.content.text = text;
-        this.note.content.preview_plain = this.truncateString(this.preview.textContent || this.preview.innerText);
-        this.componentManager.saveItem(this.note);
+        let presave = () => {
+          this.note.content.preview_plain = this.truncateString(this.preview.textContent || this.preview.innerText);
+          this.note.content.preview_html = null;
+        }
+        this.componentManager.saveItemWithPresave(this.note, presave);
       }
     })
   }
