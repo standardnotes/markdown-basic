@@ -161,14 +161,17 @@ export default class Home extends React.Component {
 
   addChangeListener() {
     document.getElementById("editor").addEventListener("input", (event) => {
-      var text = this.updatePreviewText();
       if(this.note) {
-        this.note.content.text = text;
-        let presave = () => {
-          this.note.content.preview_plain = this.truncateString(this.preview.textContent || this.preview.innerText);
-          this.note.content.preview_html = null;
-        }
-        this.componentManager.saveItemWithPresave(this.note, presave);
+        // Be sure to capture this object as a variable, as this.note may be reassigned in `streamContextItem`, so by the time
+        // you modify it in the presave block, it may not be the same object anymore, so the presave values will not be applied to
+        // the right object, and it will save incorrectly.
+        let note = this.note;
+
+        this.componentManager.saveItemWithPresave(note, () => {
+          note.content.text = this.updatePreviewText();
+          note.content.preview_plain = this.truncateString(this.preview.textContent || this.preview.innerText);
+          note.content.preview_html = null;
+        });
       }
     })
   }
