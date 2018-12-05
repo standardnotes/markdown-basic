@@ -40,7 +40,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
-        markdown_it_highlight: path.join(__dirname, 'node_modules/markdown-it-highlight/dist/index.css')
+        markdown_it_highlight: path.join(__dirname, 'node_modules/markdown-it-highlight/dist/index.css'),
+        stylekit: path.join(__dirname, 'node_modules/sn-stylekit/dist/stylekit.css')
     }
   },
   plugins: [

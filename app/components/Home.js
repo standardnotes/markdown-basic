@@ -54,17 +54,10 @@ export default class Home extends React.Component {
   render() {
 
     return (
-      <div id="simple-markdown">
+      <div id="simple-markdown" className={"sn-component " + this.state.platform}>
 
-        <div id="editor-container" className={this.state.mode.css}>
-          <textarea dir="auto" id="editor" className={this.state.mode.css}></textarea>
-          <div id="column-resizer" className={this.state.mode.css}></div>
-          <div id="preview" className={this.state.mode.css}></div>
-        </div>
-
-        <div id="footer">
+        <div id="header">
           <div className="segmented-buttons-container">
-
             <div className="buttons">
               {this.modes.map(mode =>
                 <div onClick={() => this.changeMode(mode)} className={"button " + (this.state.mode == mode ? "selected" : "")}>
@@ -75,7 +68,12 @@ export default class Home extends React.Component {
               )}
             </div>
           </div>
+        </div>
 
+        <div id="editor-container" className={this.state.mode.css}>
+          <textarea dir="auto" id="editor" className={this.state.mode.css}></textarea>
+          <div id="column-resizer" className={this.state.mode.css}></div>
+          <div id="preview" className={this.state.mode.css}></div>
         </div>
       </div>
     )
@@ -124,6 +122,8 @@ export default class Home extends React.Component {
       if(savedMode) {
         this.setModeFromModeValue(savedMode);
       }
+
+      this.setState({platform: this.componentManager.platform});
     });
 
     // componentManager.loggingEnabled = true;

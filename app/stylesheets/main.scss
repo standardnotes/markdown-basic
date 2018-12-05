@@ -91,7 +91,7 @@ $border-color: rgb(228, 228, 228);
     list-style-type: none;
   }
 
-  overflow: scroll;
+  overflow: auto;
   flex: 1;
   word-wrap: break-word;
 }
@@ -100,9 +100,11 @@ $border-color: rgb(228, 228, 228);
   margin-top: 12px;
 }
 
-#footer {
-  border-top: 1px solid rgba(gray, 0.25);
-  padding: 10px;
+#header {
+  border-bottom: 1px solid var(--sn-component-outer-border-color);
+  padding: 5px;
+  background-color: var(--sn-component-background-color);
+  color: var(--sn-component-foreground-color);
 
   .segmented-buttons-container {
     display: flex;
@@ -110,28 +112,23 @@ $border-color: rgb(228, 228, 228);
     user-select: none;
   }
 
-  $buttons-border-color: rgba(gray, 0.25);
-
   .buttons {
     display: flex;
-    border: 1px solid $buttons-border-color;
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
 
     .button {
-      padding: 8px 12px;
+      padding: 4px 12px;
+      margin-right: 4px;
+      border: 1px solid var(--sn-component-inner-border-color);
+      border-radius: 0;
+      
+
       .label {
-        opacity: 0.7;
-      }
-      &:not(:last-child) {
-        border-right: 1px solid $buttons-border-color;
+        
       }
 
       &.selected {
-        .label {
-          opacity: 1.0;
-        }
+        color: var(--sn-component-foreground-highlight-color);
+        // border-color: var(--sn-component-foreground-highlight-color);
         font-weight: bold;
       }
     }
@@ -202,3 +199,5 @@ p code {
   background-color: #f9f2f4;
   border-radius: 4px;
 }
+
+@import '~stylekit';
