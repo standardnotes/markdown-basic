@@ -55,7 +55,6 @@ export default class Home extends React.Component {
 
     return (
       <div id="simple-markdown" className={"sn-component " + this.state.platform}>
-
         <div id="header">
           <div className="segmented-buttons-container">
             <div className="buttons">
