@@ -7,16 +7,22 @@ body, html {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  font-size: var(--sn-stylekit-base-font-size);
 }
 
 $border-color: rgb(228, 228, 228);
 
+/* Simple Markdown Editor */
+
 #simple-markdown {
-  font-size: 16px;
   display: flex;
   width: 100%;
   height: 100%;
   flex-direction: column;
+  font-size: var(--sn-stylekit-font-size-editor);
+
+  background-color: var(--sn-stylekit-editor-background-color);
+  color: var(--sn-stylekit-editor-foreground-color);
 }
 
 #editor-container {
@@ -27,6 +33,10 @@ $border-color: rgb(228, 228, 228);
 }
 
 #editor {
+  background-color: var(--sn-stylekit-editor-background-color);
+  color: var(--sn-stylekit-editor-foreground-color);
+  font-size: var(--sn-stylekit-font-size-editor);
+
   &.edit {
     width: 100% !important;
   }
@@ -42,7 +52,6 @@ $border-color: rgb(228, 228, 228);
   }
 
   flex-grow: 0;
-  font-size: 16px;
   border: 0px;
   outline: 0;
   resize: none;
@@ -51,7 +60,7 @@ $border-color: rgb(228, 228, 228);
 
 #column-resizer {
   width: 8px;
-  background-color: rgb(244, 244, 244);
+  background-color: var(--sn-stylekit-border-color);
   cursor: col-resize;
 
   &.edit, &.preview {
@@ -67,6 +76,9 @@ $border-color: rgb(228, 228, 228);
   padding: 10px;
   padding-top: 0;
   padding-left: 16px;
+
+  background-color: var(--sn-stylekit-secondary-background-color);
+  color: var(--sn-stylekit-secondary-foreground-color);
 
   &.edit {
     width: 0 !important;
@@ -101,10 +113,10 @@ $border-color: rgb(228, 228, 228);
 }
 
 #header {
-  border-bottom: 1px solid var(--sn-component-outer-border-color);
+  border-bottom: 1px solid var(--sn-stylekit-border-color);
   padding: 5px;
-  background-color: var(--sn-component-background-color);
-  color: var(--sn-component-foreground-color);
+  background-color: var(--sn-stylekit-background-color);
+  color: var(--sn-stylekit-foreground-color);
 
   .segmented-buttons-container {
     display: flex;
@@ -120,13 +132,13 @@ $border-color: rgb(228, 228, 228);
       margin-right: 4px;
       border: 1px solid var(--sn-component-inner-border-color);
       border-radius: 0;
-      
+
       .label {
-        
+
       }
 
       &.selected {
-        color: var(--sn-component-foreground-highlight-color);
+        // color: var(--sn-component-foreground-highlight-color);
         // border-color: var(--sn-component-foreground-highlight-color);
         font-weight: bold;
       }
@@ -135,15 +147,13 @@ $border-color: rgb(228, 228, 228);
 }
 
 a {
-  color: #086dd6
+  color: var(--sn-stylekit-info-color);
 }
 
 pre {
-  // padding: 16px;
   overflow: auto;
   font-size: 90%;
   line-height: 1.45;
-  // background-color: #f7f7f7;
   border-radius: 3px;
 }
 

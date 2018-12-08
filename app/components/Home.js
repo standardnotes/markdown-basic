@@ -51,33 +51,6 @@ export default class Home extends React.Component {
     this.componentManager.setComponentDataValueForKey("mode", mode.mode);
   }
 
-  render() {
-
-    return (
-      <div id="simple-markdown" className={"sn-component " + this.state.platform}>
-        <div id="header">
-          <div className="segmented-buttons-container">
-            <div className="buttons">
-              {this.modes.map(mode =>
-                <div onClick={() => this.changeMode(mode)} className={"button " + (this.state.mode == mode ? "selected" : "")}>
-                  <div className="label">
-                    {mode.label}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div id="editor-container" className={this.state.mode.css}>
-          <textarea dir="auto" id="editor" className={this.state.mode.css}></textarea>
-          <div id="column-resizer" className={this.state.mode.css}></div>
-          <div id="preview" className={this.state.mode.css}></div>
-        </div>
-      </div>
-    )
-  }
-
   configureMarkdown() {
     var markdownitOptions = {
         // automatically render raw links as anchors.
@@ -110,6 +83,7 @@ export default class Home extends React.Component {
   }
 
   connectToBridge() {
+    console.log("connecting");
     var permissions = [
       {
         name: "stream-context-item"
@@ -117,6 +91,7 @@ export default class Home extends React.Component {
     ]
 
     this.componentManager = new ComponentManager(permissions, () => {
+      console.log("Ready");
       var savedMode = this.componentManager.componentDataValueForKey("mode");
       if(savedMode) {
         this.setModeFromModeValue(savedMode);
@@ -129,6 +104,8 @@ export default class Home extends React.Component {
 
     this.componentManager.streamContextItem((note) => {
       this.note = note;
+
+      console.log("Received note", note);
 
        // Only update UI on non-metadata updates.
       if(note.isMetadataUpdate) {
@@ -253,5 +230,32 @@ export default class Home extends React.Component {
       }
     });
   }
+
+
+    render() {
+      return (
+        <div id="simple-markdown" className={"sn-component " + this.state.platform}>
+          <div id="header">
+            <div className="segmented-buttons-container sk-segmented-buttons">
+              <div className="buttons">
+                {this.modes.map(mode =>
+                  <div onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode == mode ? "selected info" : "neutral")}>
+                    <div className="sk-label">
+                      {mode.label}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div id="editor-container" className={this.state.mode.css}>
+            <textarea dir="auto" id="editor" className={this.state.mode.css}></textarea>
+            <div id="column-resizer" className={this.state.mode.css}></div>
+            <div id="preview" className={this.state.mode.css}></div>
+          </div>
+        </div>
+      )
+    }
 
 }

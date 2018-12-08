@@ -47,7 +47,7 @@
     "react-dom": "16.x",
     "sass-loader": "^6.0.6",
     "sn-components-api": "1.1.11",
-    "sn-stylekit": "1.1.7",
+    "sn-stylekit": "file:~/Desktop/sn/dev/stylekit",
     "sortablejs": "^1.7.0",
     "style-loader": "~0.13.1",
     "validate-commit-msg": "2.x",
