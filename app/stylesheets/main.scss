@@ -106,6 +106,67 @@ $border-color: rgb(228, 228, 228);
   overflow: auto;
   flex: 1;
   word-wrap: break-word;
+
+  a {
+    color: var(--sn-stylekit-info-color);
+  }
+
+  pre {
+    background: var(--sn-stylekit-contrast-background-color);
+    color: var(--sn-stylekit-contrast-foreground-color);
+    border: 1px solid var(--sn-stylekit-contrast-border-color);
+    padding: 20px;
+    border-radius: 3px;
+  }
+
+  pre code {
+    background-color: transparent;
+    color: var(--sn-stylekit-contrast-foreground-color);
+  }
+
+  table {
+    display: block;
+    margin-bottom: 12px;
+    width: 100%;
+    overflow: auto;
+    border-collapse: collapse;
+    border-spacing: 0px;
+    border-color: var(--sn-stylekit-contrast-border-color);
+    background-color: var(--sn-stylekit-background-color);
+    color: var(--sn-stylekit-contrast-foreground-color);
+
+    th, td {
+      padding: 6px 13px;
+      border: 1px solid var(--sn-stylekit-contrast-border-color);
+    }
+
+    tr:nth-child(2n) {
+      background-color: var(--sn-stylekit-contrast-background-color);
+    }
+  }
+
+  p code {
+    padding: 3px 6px;
+    background-color: var(--sn-stylekit-contrast-background-color);
+    color: var(--sn-stylekit-info-color);
+    border: 1px solid var(--sn-stylekit-contrast-border-color);;
+    border-radius: 3px;
+  }
+
+  blockquote {
+    padding: 0 1rem;
+    margin-left: 0;
+    color: var(--sn-stylekit-neutral-color);
+    border-left: 0.3rem solid var(--sn-stylekit-contrast-background-color);
+  }
+
+  blockquote > :first-child {
+    margin-top: 0;
+  }
+
+  blockquote > :last-child {
+    margin-bottom: 0;
+  }
 }
 
 #preview *:first-child {
@@ -146,67 +207,5 @@ $border-color: rgb(228, 228, 228);
   }
 }
 
-a {
-  color: var(--sn-stylekit-info-color);
-}
-
-pre {
-  overflow: auto;
-  font-size: 90%;
-  line-height: 1.45;
-  border-radius: 3px;
-}
-
-table {
- border-collapse: collapse;
- border-spacing: 0;
-}
-
-td,
-th {
- padding: 0;
-}
-
-table {
-  display: block;
-  width: 100%;
-  overflow: auto;
-  word-break: normal;
-  word-break: keep-all;
-}
-
-th {
-  font-weight: bold;
-}
-
-th, td {
-  padding: 0.5rem 1rem;
-  border: 1px solid #e9ebec;
-}
-
-
-blockquote {
-  padding: 0 1rem;
-  margin-left: 0;
-  color: #819198;
-  border-left: 0.3rem solid #dce6f0;
-}
-
-blockquote > :first-child {
-  margin-top: 0;
-}
-
-blockquote > :last-child {
-  margin-bottom: 0;
-}
-
-li code,
-p code {
-  padding: 2px 4px;
-  font-size: 90%;
-  color: #c7254e;
-  background-color: #f9f2f4;
-  border-radius: 4px;
-}
 
 @import '~stylekit';

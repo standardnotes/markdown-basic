@@ -239,7 +239,7 @@ export default class Home extends React.Component {
             <div className="segmented-buttons-container sk-segmented-buttons">
               <div className="buttons">
                 {this.modes.map(mode =>
-                  <div onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode == mode ? "selected info" : "neutral")}>
+                  <div onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode == mode ? "selected info" : "sk-secondary-contrast")}>
                     <div className="sk-label">
                       {mode.label}
                     </div>
