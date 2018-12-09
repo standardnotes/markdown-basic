@@ -157,7 +157,11 @@ $border-color: rgb(228, 228, 228);
     padding: 0 1rem;
     margin-left: 0;
     color: var(--sn-stylekit-neutral-color);
-    border-left: 0.3rem solid var(--sn-stylekit-contrast-background-color);
+    border-left: 0.3rem solid var(--sn-stylekit-secondary-contrast-background-color);
+  }
+
+  hr {
+    border-color: var(--sn-stylekit-background-color);
   }
 
   blockquote > :first-child {
