@@ -83,7 +83,6 @@ export default class Home extends React.Component {
   }
 
   connectToBridge() {
-    console.log("connecting");
     var permissions = [
       {
         name: "stream-context-item"
@@ -91,7 +90,6 @@ export default class Home extends React.Component {
     ]
 
     this.componentManager = new ComponentManager(permissions, () => {
-      console.log("Ready");
       var savedMode = this.componentManager.componentDataValueForKey("mode");
       if(savedMode) {
         this.setModeFromModeValue(savedMode);
@@ -104,8 +102,6 @@ export default class Home extends React.Component {
 
     this.componentManager.streamContextItem((note) => {
       this.note = note;
-
-      console.log("Received note", note);
 
        // Only update UI on non-metadata updates.
       if(note.isMetadataUpdate) {

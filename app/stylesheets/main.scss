@@ -8,9 +8,8 @@ body, html {
   padding: 0;
   overflow: hidden;
   font-size: var(--sn-stylekit-base-font-size);
+  background-color: transparent;
 }
-
-$border-color: rgb(228, 228, 228);
 
 /* Simple Markdown Editor */
 
@@ -198,13 +197,7 @@ $border-color: rgb(228, 228, 228);
       border: 1px solid var(--sn-component-inner-border-color);
       border-radius: 0;
 
-      .label {
-
-      }
-
       &.selected {
-        // color: var(--sn-component-foreground-highlight-color);
-        // border-color: var(--sn-component-foreground-highlight-color);
         font-weight: bold;
       }
     }
