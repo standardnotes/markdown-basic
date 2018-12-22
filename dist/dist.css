@@ -68,6 +68,7 @@ body, html {
   background-color: var(--sn-stylekit-editor-background-color);
   color: var(--sn-stylekit-editor-foreground-color);
   font-size: var(--sn-stylekit-font-size-editor);
+  -webkit-overflow-scrolling: touch;
   flex-grow: 0;
   border: 0px;
   outline: 0;
@@ -614,6 +615,7 @@ body, html {
   resize: none; }
 
 .sn-component input.sk-input.clear {
+  color: var(--sn-stylekit-foreground-color);
   background-color: transparent;
   border: none; }
 

@@ -35,6 +35,7 @@ body, html {
   background-color: var(--sn-stylekit-editor-background-color);
   color: var(--sn-stylekit-editor-foreground-color);
   font-size: var(--sn-stylekit-font-size-editor);
+  -webkit-overflow-scrolling: touch;
 
   &.edit {
     width: 100% !important;
