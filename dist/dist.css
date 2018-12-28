@@ -94,8 +94,8 @@ body, html {
   padding: 10px;
   padding-top: 0;
   padding-left: 16px;
-  background-color: var(--sn-stylekit-secondary-background-color);
-  color: var(--sn-stylekit-secondary-foreground-color);
+  background-color: var(--sn-stylekit-background-color);
+  color: var(--sn-stylekit-foreground-color);
   overflow: auto;
   flex: 1;
   word-wrap: break-word; }
@@ -119,10 +119,17 @@ body, html {
     color: var(--sn-stylekit-contrast-foreground-color);
     border: 1px solid var(--sn-stylekit-contrast-border-color);
     padding: 20px;
-    border-radius: 3px; }
+    border-radius: 3px;
+    overflow: auto; }
   #preview pre code {
     background-color: transparent;
     color: var(--sn-stylekit-contrast-foreground-color); }
+  #preview p code {
+    padding: 2px 6px;
+    background-color: var(--sn-stylekit-contrast-background-color);
+    color: var(--sn-stylekit-info-color);
+    border: 1px solid var(--sn-stylekit-contrast-border-color);
+    border-radius: 3px; }
   #preview table {
     display: block;
     margin-bottom: 12px;
@@ -131,33 +138,24 @@ body, html {
     border-collapse: collapse;
     border-spacing: 0px;
     border-color: var(--sn-stylekit-contrast-border-color);
-    background-color: var(--sn-stylekit-background-color);
+    background-color: var(--sn-stylekit-contrast-background-color);
     color: var(--sn-stylekit-contrast-foreground-color); }
     #preview table th, #preview table td {
       padding: 6px 13px;
       border: 1px solid var(--sn-stylekit-contrast-border-color); }
     #preview table tr:nth-child(2n) {
-      background-color: var(--sn-stylekit-contrast-background-color); }
-  #preview p code {
-    padding: 3px 6px;
-    background-color: var(--sn-stylekit-contrast-background-color);
-    color: var(--sn-stylekit-info-color);
-    border: 1px solid var(--sn-stylekit-contrast-border-color);
-    border-radius: 3px; }
+      background-color: var(--sn-stylekit-background-color); }
   #preview blockquote {
     padding: 0 1rem;
     margin-left: 0;
     color: var(--sn-stylekit-neutral-color);
-    border-left: 0.3rem solid var(--sn-stylekit-secondary-contrast-background-color); }
+    border-left: 0.3rem solid var(--sn-stylekit-contrast-background-color); }
   #preview hr {
-    border-color: var(--sn-stylekit-background-color); }
+    border-color: var(--sn-stylekit-contrast-background-color); }
   #preview blockquote > :first-child {
     margin-top: 0; }
   #preview blockquote > :last-child {
     margin-bottom: 0; }
-
-#preview *:first-child {
-  margin-top: 12px; }
 
 #header {
   border-bottom: 1px solid var(--sn-stylekit-border-color);
