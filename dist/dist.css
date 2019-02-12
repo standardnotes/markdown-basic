@@ -108,7 +108,7 @@ body, html {
   #preview.preview {
     width: 100% !important; }
   #preview img {
-    width: 100%; }
+    max-width: 100%; }
   #preview ul.contains-task-list {
     padding-left: 0;
     list-style-type: none; }
