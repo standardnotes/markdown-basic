@@ -81,6 +81,7 @@ body, html {
   padding: 10px;
   padding-top: 0;
   padding-left: 16px;
+  -webkit-overflow-scrolling: touch;
 
   background-color: var(--sn-stylekit-background-color);
   color: var(--sn-stylekit-foreground-color);
