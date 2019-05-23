@@ -31,6 +31,7 @@ export default class Home extends React.Component {
     this.connectToBridge();
     this.updatePreviewText();
     this.addChangeListener();
+    this.addScrollListeners();
 
     this.configureResizer();
     this.addTabHandler();
@@ -98,7 +99,7 @@ export default class Home extends React.Component {
       this.setState({platform: this.componentManager.platform});
     });
 
-    // componentManager.loggingEnabled = true;
+    // this.componentManager.loggingEnabled = true;
 
     this.componentManager.streamContextItem((note) => {
       this.note = note;
@@ -145,6 +146,29 @@ export default class Home extends React.Component {
           note.content.preview_html = null;
         });
       }
+    })
+  }
+
+  addScrollListeners() {
+    this.scrollTriggers = {};
+    this.syncScroll(this.editor, this.preview);
+    this.syncScroll(this.preview, this.editor);
+  }
+
+  syncScroll(source, destination) {
+    source.addEventListener('scroll', (event) => {
+      // Avoid the cascading effect by not handling the event if it was triggered initially by this element
+      if (this.scrollTriggers[source] === true) {
+        this.scrollTriggers[source] = false;
+        return;
+      }
+      this.scrollTriggers[source] = true;
+
+      var target = event.target
+      var height = target.scrollHeight - target.clientHeight;
+      var ratio = parseFloat(target.scrollTop) / height;
+      var move = (destination.scrollHeight - destination.clientHeight) * ratio;
+      destination.scrollTop = move;
     })
   }
 
