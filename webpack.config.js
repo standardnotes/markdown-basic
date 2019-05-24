@@ -40,7 +40,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.scss'],
     alias: {
-        markdown_it_highlight: path.join(__dirname, 'node_modules/markdown-it-highlight/dist/index.css'),
+        highlightjs_css: path.join(__dirname, 'node_modules/highlight.js/styles/atom-one-light.css'),
         stylekit: path.join(__dirname, 'node_modules/sn-stylekit/dist/stylekit.css')
     }
   },

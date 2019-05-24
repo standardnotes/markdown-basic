@@ -2,8 +2,6 @@ import React from 'react';
 import ComponentManager from 'sn-components-api';
 var MarkdownIt = require('markdown-it');
 
-import markdownItHighlight from 'markdown-it-highlight';
-
 const EditMode = 0;
 const SplitMode = 1;
 const PreviewMode = 2;
@@ -60,7 +58,7 @@ export default class Home extends React.Component {
     this.markdown = MarkdownIt(markdownitOptions)
       .use(require('markdown-it-footnote'))
       .use(require('markdown-it-task-lists'))
-      .use(markdownItHighlight);
+      .use(require('markdown-it-highlightjs'));
 
       // Remember old renderer, if overriden, or proxy to default renderer
       var defaultRender = this.markdown.renderer.rules.link_open || function(tokens, idx, options, env, self) {
