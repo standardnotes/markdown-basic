@@ -2052,6 +2052,7 @@ function (_React$Component) {
       this.connectToBridge();
       this.updatePreviewText();
       this.addChangeListener();
+      this.addScrollListeners();
       this.configureResizer();
       this.addTabHandler();
     }
@@ -2141,7 +2142,7 @@ function (_React$Component) {
         _this2.setState({
           platform: _this2.componentManager.platform
         });
-      }); // componentManager.loggingEnabled = true;
+      }); // this.componentManager.loggingEnabled = true;
 
       this.componentManager.streamContextItem(function (note) {
         _this2.note = note; // Only update UI on non-metadata updates.
@@ -2197,6 +2198,33 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "addScrollListeners",
+    value: function addScrollListeners() {
+      this.scrollTriggers = {};
+      this.syncScroll(this.editor, this.preview);
+      this.syncScroll(this.preview, this.editor);
+    }
+  }, {
+    key: "syncScroll",
+    value: function syncScroll(source, destination) {
+      var _this4 = this;
+
+      source.addEventListener('scroll', function (event) {
+        // Avoid the cascading effect by not handling the event if it was triggered initially by this element
+        if (_this4.scrollTriggers[source] === true) {
+          _this4.scrollTriggers[source] = false;
+          return;
+        }
+
+        _this4.scrollTriggers[source] = true;
+        var target = event.target;
+        var height = target.scrollHeight - target.clientHeight;
+        var ratio = parseFloat(target.scrollTop) / height;
+        var move = (destination.scrollHeight - destination.clientHeight) * ratio;
+        destination.scrollTop = move;
+      });
+    }
+  }, {
     key: "removeSelection",
     value: function removeSelection() {
       if (window.getSelection) {
@@ -2208,7 +2236,7 @@ function (_React$Component) {
   }, {
     key: "configureResizer",
     value: function configureResizer() {
-      var _this4 = this;
+      var _this5 = this;
 
       var pressed = false;
       var startWidth = this.editor.offsetWidth;
@@ -2222,7 +2250,7 @@ function (_React$Component) {
         lastDownX = event.clientX;
         columnResizer.classList.add("dragging");
 
-        _this4.editor.classList.add("no-selection");
+        _this5.editor.classList.add("no-selection");
       });
       document.addEventListener("mousemove", function (event) {
         if (!pressed) {
@@ -2233,22 +2261,22 @@ function (_React$Component) {
 
         if (x < resizerWidth / 2 + safetyOffset) {
           x = resizerWidth / 2 + safetyOffset;
-        } else if (x > _this4.simpleMarkdown.offsetWidth - resizerWidth - safetyOffset) {
-          x = _this4.simpleMarkdown.offsetWidth - resizerWidth - safetyOffset;
+        } else if (x > _this5.simpleMarkdown.offsetWidth - resizerWidth - safetyOffset) {
+          x = _this5.simpleMarkdown.offsetWidth - resizerWidth - safetyOffset;
         }
 
         var colLeft = x - resizerWidth / 2;
         columnResizer.style.left = colLeft + "px";
-        _this4.editor.style.width = colLeft - safetyOffset + "px";
+        _this5.editor.style.width = colLeft - safetyOffset + "px";
 
-        _this4.removeSelection();
+        _this5.removeSelection();
       });
       document.addEventListener("mouseup", function (event) {
         if (pressed) {
           pressed = false;
           columnResizer.classList.remove("dragging");
 
-          _this4.editor.classList.remove("no-selection");
+          _this5.editor.classList.remove("no-selection");
         }
       });
     }
@@ -2277,7 +2305,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       return __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement("div", {
         id: "simple-markdown",
@@ -2291,9 +2319,9 @@ function (_React$Component) {
       }, this.modes.map(function (mode) {
         return __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement("div", {
           onClick: function onClick() {
-            return _this5.changeMode(mode);
+            return _this6.changeMode(mode);
           },
-          className: "sk-button button " + (_this5.state.mode == mode ? "selected info" : "sk-secondary-contrast")
+          className: "sk-button button " + (_this6.state.mode == mode ? "selected info" : "sk-secondary-contrast")
         }, __WEBPACK_IMPORTED_MODULE_5_react___default.a.createElement("div", {
           className: "sk-label"
         }, mode.label));
