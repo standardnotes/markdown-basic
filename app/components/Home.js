@@ -1,6 +1,6 @@
 import React from 'react';
 import ComponentManager from 'sn-components-api';
-var MarkdownIt = require('markdown-it');
+const MarkdownIt = require('markdown-it');
 
 const EditMode = 0;
 const SplitMode = 1;

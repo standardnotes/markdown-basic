@@ -47,6 +47,7 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin({ filename: './dist.css', disable: false, allChunks: true}),
     new uglifyJsPlugin({
+      include: /\.min\.js$/,
       compress: {
         warnings: false
       }
