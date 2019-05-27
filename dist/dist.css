@@ -83,7 +83,7 @@ hue-6-2: #c18401
   text-decoration: underline; }
 
 body, html {
-  font-family: sans-serif;
+  font-family: var(--sn-stylekit-sans-serif-font);
   height: 100%;
   width: 100%;
   margin: 0;
@@ -104,6 +104,8 @@ body, html {
   font-size: var(--sn-stylekit-font-size-editor);
   background-color: var(--sn-stylekit-editor-background-color);
   color: var(--sn-stylekit-editor-foreground-color); }
+  #simple-markdown .sk-label {
+    width: 48px; }
 
 #editor-container {
   flex-grow: 1;
@@ -116,6 +118,7 @@ body, html {
   color: var(--sn-stylekit-editor-foreground-color);
   font-size: var(--sn-stylekit-font-size-editor);
   -webkit-overflow-scrolling: touch;
+  font-family: var(--sn-stylekit-sans-serif-font);
   flex-grow: 0;
   border: 0px;
   outline: 0;
@@ -124,7 +127,7 @@ body, html {
   #editor.edit {
     width: 100% !important; }
   #editor.split {
-    width: calc(50% - 20px); }
+    width: calc(50% - 4px); }
   #editor.preview {
     width: 0 !important;
     padding: 0;
@@ -138,9 +141,10 @@ body, html {
     display: none; }
 
 #preview {
-  padding: 10px;
+  padding: 12px;
   padding-top: 0;
-  padding-left: 16px;
+  font-family: var(--sn-stylekit-sans-serif-font);
+  margin-top: -4px;
   -webkit-overflow-scrolling: touch;
   background-color: var(--sn-stylekit-background-color);
   color: var(--sn-stylekit-foreground-color);
@@ -152,7 +156,7 @@ body, html {
     padding: 0;
     padding-left: 0; }
   #preview.split {
-    width: calc(50% - 20px); }
+    width: calc(50% - 4px); }
   #preview.preview {
     width: 100% !important; }
   #preview img {

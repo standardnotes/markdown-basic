@@ -1,7 +1,7 @@
 @import '~highlightjs_css';
 
 body, html {
-  font-family: sans-serif;
+  font-family: var(--sn-stylekit-sans-serif-font);
   height: 100%;
   width: 100%;
   margin: 0;
@@ -45,6 +45,7 @@ body, html {
   color: var(--sn-stylekit-editor-foreground-color);
   font-size: var(--sn-stylekit-font-size-editor);
   -webkit-overflow-scrolling: touch;
+  font-family: var(--sn-stylekit-sans-serif-font);
 
   &.edit {
     width: 100% !important;
@@ -84,6 +85,11 @@ body, html {
 #preview {
   padding: 12px;
   padding-top: 0;
+  font-family: var(--sn-stylekit-sans-serif-font);
+
+  // To align top with textarea.
+  margin-top: -4px;
+
   -webkit-overflow-scrolling: touch;
 
   background-color: var(--sn-stylekit-background-color);
