@@ -46,8 +46,9 @@ export default class Home extends React.Component {
 
   changeMode(mode) {
     this.setState({mode: mode});
-
-    this.componentManager.setComponentDataValueForKey("mode", mode.mode);
+    if(this.note) {
+      this.componentManager.setComponentDataValueForKey("mode", mode.mode);
+    }
   }
 
   configureMarkdown() {

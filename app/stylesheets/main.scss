@@ -154,6 +154,10 @@ body, html {
     border-radius: 3px;
   }
 
+  code {
+    font-family: var(--sn-stylekit-monospace-font);
+  }
+
   table {
     display: block;
     margin-bottom: 12px;
