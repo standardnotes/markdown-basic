@@ -29,10 +29,29 @@ export default class Home extends React.Component {
     this.connectToBridge();
     this.updatePreviewText();
     this.addChangeListener();
-    this.addScrollListeners();
 
     this.configureResizer();
     this.addTabHandler();
+
+    this.scrollTriggers = {};
+    this.scrollHandlers = [
+      {el: this.editor, handler: this.scrollHandler(this.editor, this.preview)},
+      {el: this.preview, handler: this.scrollHandler(this.preview, this.editor)}
+    ];
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    var prevMode = this.state.mode.mode;
+    var nextMode = nextState.mode.mode;
+
+    // If we changed to Split mode we add the scroll listeners
+    if(prevMode !== nextMode) {
+      if(nextMode === SplitMode) {
+        this.addScrollListeners();
+      } else {
+        this.removeScrollListeners();
+      }
+    }
   }
 
   setModeFromModeValue(value) {
@@ -149,26 +168,40 @@ export default class Home extends React.Component {
   }
 
   addScrollListeners() {
-    this.scrollTriggers = {};
-    this.syncScroll(this.editor, this.preview);
-    this.syncScroll(this.preview, this.editor);
+    this.scrollHandlers.forEach(({el, handler}) => el.addEventListener('scroll', handler));
   }
 
-  syncScroll(source, destination) {
-    source.addEventListener('scroll', (event) => {
+  removeScrollListeners() {
+    this.scrollHandlers.forEach(({el, handler}) => el.removeEventListener('scroll', handler));
+  }
+
+  scrollHandler = (source, destination) => {
+    var frameRequested;
+
+    return (event) => {
       // Avoid the cascading effect by not handling the event if it was triggered initially by this element
-      if (this.scrollTriggers[source] === true) {
+      if(this.scrollTriggers[source] === true) {
         this.scrollTriggers[source] = false;
         return;
       }
       this.scrollTriggers[source] = true;
 
-      var target = event.target
-      var height = target.scrollHeight - target.clientHeight;
-      var ratio = parseFloat(target.scrollTop) / height;
-      var move = (destination.scrollHeight - destination.clientHeight) * ratio;
-      destination.scrollTop = move;
-    })
+      // Only request the animation frame once until it gets processed
+      if(frameRequested) {
+        return;
+      }
+      frameRequested = true;
+
+      window.requestAnimationFrame(() => {
+        var target = event.target
+        var height = target.scrollHeight - target.clientHeight;
+        var ratio = parseFloat(target.scrollTop) / height;
+        var move = (destination.scrollHeight - destination.clientHeight) * ratio;
+        destination.scrollTop = move;
+
+        frameRequested = false;
+      });
+    }
   }
 
   removeSelection() {
