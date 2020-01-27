@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const uglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
   devtool: 'cheap-source-map',
@@ -16,7 +15,7 @@ module.exports = {
     filename: './dist.js'
   },
   module: {
-    loaders: [
+    rules: [
       { test: /\.css$/, include: path.resolve(__dirname, 'app'), loader: 'style-loader!css-loader' },
       {
         test: /\.scss$/,
@@ -32,7 +31,6 @@ module.exports = {
       },
       { test: /\.js[x]?$/, include: [
         path.resolve(__dirname, 'app'),
-        path.resolve(__dirname, 'node_modules/sortablejs/Sortable.min.js'),
         path.resolve(__dirname, 'node_modules/sn-components-api/dist/dist.js')
       ], exclude: /node_modules/, loader: 'babel-loader' }
     ]
@@ -46,12 +44,6 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({ filename: './dist.css', disable: false, allChunks: true}),
-    new uglifyJsPlugin({
-      include: /\.min\.js$/,
-      compress: {
-        warnings: false
-      }
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')

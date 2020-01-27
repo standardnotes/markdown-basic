@@ -1,1 +1,1 @@
-# Simple Markdown Editor
+# Markdown Basic
