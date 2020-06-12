@@ -115,7 +115,7 @@ export class Home extends React.Component<{}, AppProps> {
         if (debugMode) {
           console.log("setModeFromModeValue mode: " + mode.mode)
         }
-        this.setState({ 
+        this.setState({
           mode: mode.mode,
           label: mode.label,
           css: mode.css
@@ -126,24 +126,24 @@ export class Home extends React.Component<{}, AppProps> {
   }
 
   changeMode = (mode: AppProps) => {
-    this.setState({ 
+    this.setState({
       mode: mode.mode,
       label: mode.label,
       css: mode.css
     });
-      if (debugMode) {
-        console.log("changeMode mode: " + mode.mode)
-      }
-      this.editorKit.internal.componentManager.setComponentDataValueForKey("mode", mode.mode);
+    if (debugMode) {
+      console.log("changeMode mode: " + mode.mode)
+    }
+    this.editorKit.internal.componentManager.setComponentDataValueForKey("mode", mode.mode);
   }
 
   configureMarkdown = () => {
     // Remember old renderer, if overriden, or proxy to default renderer
-    const defaultRender = MarkdownParser.renderer.rules.link_open || function (tokens: any , idx: any , options: any , env: any , self: any) {
+    const defaultRender = MarkdownParser.renderer.rules.link_open || function (tokens: any, idx: any, options: any, env: any, self: any) {
       return self.renderToken(tokens, idx, options);
     };
 
-    MarkdownParser.renderer.rules.link_open = function (tokens: any , idx: any , options: any , env: any , self: any ) {
+    MarkdownParser.renderer.rules.link_open = function (tokens: any, idx: any, options: any, env: any, self: any) {
       // If you are sure other plugins can't add `target` - drop check below
       let aIndex = tokens[idx].attrIndex('target');
 
@@ -221,10 +221,10 @@ export class Home extends React.Component<{}, AppProps> {
   onKeyDown = (event: React.KeyboardEvent) => {
     // Tab handler
     keyMap.set(event.key, true);
-      if (!(keyMap.get('Shift')) && keyMap.get('Tab')) {
-        event.preventDefault();
-        document.execCommand("insertText", false, "\t");
-      }
+    if (!(keyMap.get('Shift')) && keyMap.get('Tab')) {
+      event.preventDefault();
+      document.execCommand("insertText", false, "\t");
+    }
   }
 
   onKeyUp = (event: React.KeyboardEvent) => {
@@ -237,11 +237,11 @@ export class Home extends React.Component<{}, AppProps> {
 
   render() {
     return (
-      <div id="simple-markdown" className={"sn-component "+ this.state.platform} tabIndex={0}>
+      <div id="simple-markdown" className={"sn-component " + this.state.platform} tabIndex={0}>
         <div id="header">
           <div className="segmented-buttons-container sk-segmented-buttons">
             <div className="buttons">
-            {modes.map(mode =>
+              {modes.map(mode =>
                 <button onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode === mode.mode ? "selected info" : "sk-secondary-contrast")}>
                   <div className="sk-label">
                     {mode.label}
@@ -252,16 +252,16 @@ export class Home extends React.Component<{}, AppProps> {
           </div>
         </div>
         <main id="editor-container" className={this.state.css}>
-          <textarea 
-          dir="auto" 
-          id="editor" 
-          spellCheck="true"
-          className={this.state.css}
-          value={this.state.text}
-          onChange={this.handleInputChange}
-          onKeyDown={this.onKeyDown}
-          onKeyUp={this.onKeyUp}
-          onBlur={this.onBlur}
+          <textarea
+            dir="auto"
+            id="editor"
+            spellCheck="true"
+            className={this.state.css}
+            value={this.state.text}
+            onChange={this.handleInputChange}
+            onKeyDown={this.onKeyDown}
+            onKeyUp={this.onKeyUp}
+            onBlur={this.onBlur}
           />
           <div id="column-resizer" className={this.state.css}></div>
           <section id="preview" className={this.state.css}></section>
