@@ -112,7 +112,7 @@ export class Home extends React.Component<{}, AppProps> {
   }
 
   setModeFromModeValue = (value: number) => {
-    for (var mode of modes) {
+    for (const mode of modes) {
       if (mode.mode == value) {
         if (debugMode) {
           console.log("setModeFromModeValue mode: " + mode.mode)
@@ -162,9 +162,7 @@ export class Home extends React.Component<{}, AppProps> {
   removeSelection = () => {
     if (window.getSelection) {
       window.getSelection().removeAllRanges();
-    } /*else if (document.selection) { // gives TS error 'selection' does not exist on type 'Document'
-      document.selection.empty();
-    }*/
+    }
   }
 
   configureResizer = () => {
