@@ -25,7 +25,7 @@ const MarkdownParser = MarkdownIt(markdownitOptions)
 type AppProps = {
   text?: string,
   mode: any;
-  platform?: any,
+  platform?: 'desktop' | 'mobile',
 }
 
 const initialState = {
@@ -34,9 +34,6 @@ const initialState = {
 }
 const debugMode = false;
 
-if (debugMode) {
-  console.log("home loaded 2");
-}
 let keyMap = new Map();
 
 export class Home extends React.Component<{}, AppProps> {
@@ -45,10 +42,10 @@ export class Home extends React.Component<{}, AppProps> {
 
   constructor(props: AppProps) {
     super(props);
-    if (debugMode) {
-      console.log("started");
-    }
-    this.state = initialState;
+    this.state = {
+      mode: modes[0],
+      text: "",
+    };
   }
 
   componentDidMount = () => {
@@ -58,10 +55,7 @@ export class Home extends React.Component<{}, AppProps> {
   }
 
   configureEditorKit() {
-    if (debugMode){
-      console.log("editor kit loaded");
-    }
-    let delegate = new EditorKitDelegate({
+    const delegate = new EditorKitDelegate({
       setEditorRawText: (text: string) => {
         this.setState(
           {
@@ -100,7 +94,7 @@ export class Home extends React.Component<{}, AppProps> {
 
   loadSavedMode = () => {
     try {
-      let savedMode = this.editorKit.internal.componentManager.componentDataValueForKey("mode");
+      const savedMode = this.editorKit.internal.componentManager.componentDataValueForKey("mode");
       if (savedMode) {
         this.setModeFromModeValue(savedMode);
       }
@@ -113,7 +107,7 @@ export class Home extends React.Component<{}, AppProps> {
 
   setModeFromModeValue = (value: number) => {
     for (const mode of modes) {
-      if (mode.mode == value) {
+      if (mode.mode === value) {
         if (debugMode) {
           console.log("setModeFromModeValue mode: " + mode.mode)
         }
@@ -230,16 +224,13 @@ export class Home extends React.Component<{}, AppProps> {
   }
 
   render() {
-    if (debugMode) {
-      console.log("rendered");
-    };
     return (
       <div id="simple-markdown" className={"sn-component "+ this.state.platform} tabIndex={0}>
         <div id="header">
           <div className="segmented-buttons-container sk-segmented-buttons">
             <div className="buttons">
             {modes.map(mode =>
-                <button onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode == mode ? "selected info" : "sk-secondary-contrast")}>
+                <button onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode === mode ? "selected info" : "sk-secondary-contrast")}>
                   <div className="sk-label">
                     {mode.label}
                   </div>
