@@ -67,6 +67,12 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
-    new CopyWebpackPlugin({ patterns: [{from: './app/index.html', to: 'index.html' }]})
+    new CopyWebpackPlugin({
+       patterns: [
+         {from: './app/index.html', to: 'index.html'}, 
+         {from: path.resolve(__dirname, './node_modules/react/umd'), to: 'react/umd'},
+         {from: path.resolve(__dirname, './node_modules/react-dom/umd'), to: 'react-dom/umd'},
+         {from: path.resolve(__dirname, './node_modules/katex/dist'), to: 'katex'},
+        ]})
   ]
 };
