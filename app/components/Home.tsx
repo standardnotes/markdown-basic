@@ -26,9 +26,6 @@ type AppProps = {
   text?: string,
   mode: any;
   platform?: any,
-  simpleMarkdown?: HTMLElement,
-  editor?: HTMLElement,
-  preview?: HTMLElement,
 }
 
 const initialState = {
