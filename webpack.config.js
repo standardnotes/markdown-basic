@@ -1,12 +1,13 @@
 const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  devtool: 'cheap-source-map',
+  mode: 'production',
+  devtool: 'source-map',
   entry: [
-    path.resolve(__dirname, 'app/main.js'),
+    path.resolve(__dirname, 'app/main.tsx'),
     path.resolve(__dirname, 'app/stylesheets/main.scss'),
   ],
   output: {
@@ -16,38 +17,55 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.css$/, include: path.resolve(__dirname, 'app'), loader: 'style-loader!css-loader' },
       {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader',
-            { loader: 'sass-loader', query: { sourceMap: false } },
-          ],
-          publicPath: '../'
-        }),
+        test: /\.s?css$/,
+        include: path.resolve(__dirname, 'app'),
+        loader: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
       },
-      { test: /\.js[x]?$/, include: [
-        path.resolve(__dirname, 'app'),
-        path.resolve(__dirname, 'node_modules/sn-components-api/dist/dist.js')
-      ], exclude: /node_modules/, loader: 'babel-loader' }
+      {
+        test: /\.ts(x?)$/,
+        exclude: /node_modules/,
+        use: [
+            {
+                loader: "ts-loader"
+            }
+        ]
+      },
+        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        exclude: /node_modules/, 
+        loader: "source-map-loader"
+      },
     ]
   },
+  externals: {
+    'filesafe-js': 'filesafe-js',
+    "react": "React",
+    "react-dom": "ReactDOM",
+  },
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.scss'],
+    modules: [
+      "node_modules",
+      path.resolve(__dirname, "app")
+    ],
+    extensions: ['.ts','.tsx','.js', '.jsx', '.css', '.scss'],
     alias: {
         highlightjs_css: path.join(__dirname, 'node_modules/highlight.js/styles/atom-one-light.css'),
         stylekit: path.join(__dirname, 'node_modules/sn-stylekit/dist/stylekit.css')
     }
   },
   plugins: [
-    new ExtractTextPlugin({ filename: './dist.css', disable: false, allChunks: true}),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
+    new MiniCssExtractPlugin(
+      {
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: 'dist.css',
       }
+    ),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new CopyWebpackPlugin({ patterns: [{from: './app/index.html', to: 'index.html' }]})
   ]
