@@ -259,7 +259,7 @@ export class Home extends React.Component<{}, AppProps> {
           onKeyDown={this.onKeyDown}
           onKeyUp={this.onKeyUp}
           onBlur={this.onBlur}
-          ></textarea>
+          />
           <div id="column-resizer" className={this.state.mode.css}></div>
           <section id="preview" className={this.state.mode.css}></section>
         </main>
