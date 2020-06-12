@@ -24,7 +24,9 @@ const MarkdownParser = MarkdownIt(markdownitOptions)
 
 type AppProps = {
   text?: string,
-  mode: any;
+  mode: number,
+  label: string,
+  css: string,
   platform?: 'desktop' | 'mobile',
 }
 
@@ -43,7 +45,9 @@ export class Home extends React.Component<{}, AppProps> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      mode: modes[0],
+      mode: modes[0].mode,
+      label: modes[0].label,
+      css: modes[0].css,
       text: "",
     };
   }
@@ -111,14 +115,22 @@ export class Home extends React.Component<{}, AppProps> {
         if (debugMode) {
           console.log("setModeFromModeValue mode: " + mode.mode)
         }
-        this.setState({ mode: mode });
+        this.setState({ 
+          mode: mode.mode,
+          label: mode.label,
+          css: mode.css
+        });
         return;
       }
     }
   }
 
   changeMode = (mode: AppProps) => {
-    this.setState({ mode: mode });
+    this.setState({ 
+      mode: mode.mode,
+      label: mode.label,
+      css: mode.css
+    });
       if (debugMode) {
         console.log("changeMode mode: " + mode.mode)
       }
@@ -230,7 +242,7 @@ export class Home extends React.Component<{}, AppProps> {
           <div className="segmented-buttons-container sk-segmented-buttons">
             <div className="buttons">
             {modes.map(mode =>
-                <button onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode === mode ? "selected info" : "sk-secondary-contrast")}>
+                <button onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode === mode.mode ? "selected info" : "sk-secondary-contrast")}>
                   <div className="sk-label">
                     {mode.label}
                   </div>
@@ -239,20 +251,20 @@ export class Home extends React.Component<{}, AppProps> {
             </div>
           </div>
         </div>
-        <main id="editor-container" className={this.state.mode.css}>
+        <main id="editor-container" className={this.state.css}>
           <textarea 
           dir="auto" 
           id="editor" 
           spellCheck="true"
-          className={this.state.mode.css}
+          className={this.state.css}
           value={this.state.text}
           onChange={this.handleInputChange}
           onKeyDown={this.onKeyDown}
           onKeyUp={this.onKeyUp}
           onBlur={this.onBlur}
           />
-          <div id="column-resizer" className={this.state.mode.css}></div>
-          <section id="preview" className={this.state.mode.css}></section>
+          <div id="column-resizer" className={this.state.css}></div>
+          <section id="preview" className={this.state.css}></section>
         </main>
       </div>
     )
