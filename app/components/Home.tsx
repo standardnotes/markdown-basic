@@ -252,6 +252,7 @@ export class Home extends React.Component<{}, AppProps> {
           <textarea 
           dir="auto" 
           id="editor" 
+          spellCheck="true"
           className={this.state.mode.css}
           value={this.state.text}
           onChange={this.handleInputChange}
