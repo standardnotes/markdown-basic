@@ -107,10 +107,26 @@ isn’t indented.
 
 - KaTeX
 - Printing
-- Custom Font Families
-- Custom Font Sizes
-- Superscript
-- Subscript
+
+## Customization
+
+To use a custom font size for your editor and rendered text, add this to your note and specify your font size (16px is 12pt).
+
+```css
+<style>:root {--sn-stylekit-font-size-editor: 16px}</style>
+```
+
+To use a custom font for your editor, add this to your note:
+
+```css
+<style> #editor {font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, "Ubuntu Mono", courier, monospace;} </style>
+```
+
+To use a custom font for your rendered text, add this to your note:
+
+```css
+<style> #preview {font-family: 'Times New Roman'} </style>
+```
 
 ## License
 

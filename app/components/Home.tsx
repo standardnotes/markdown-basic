@@ -13,8 +13,9 @@ const modes = [
 ];
 
 const markdownitOptions = {
-  // automatically render raw links as anchors.
-  linkify: true
+  html: true, // allow html
+  linkify: true, // automatically render raw links as anchors.
+  breaks: true, // \n creates new line (eliminates need for trailing spaces)
 };
 
 const MarkdownParser = MarkdownIt(markdownitOptions)
@@ -91,8 +92,8 @@ export class Home extends React.Component<{}, AppProps> {
     this.setState({
       text: value
     }, () => {
-      this.updatePreviewText();
       this.saveNote();
+      this.updatePreviewText();
     });
   };
 
@@ -119,6 +120,8 @@ export class Home extends React.Component<{}, AppProps> {
           mode: mode.mode,
           label: mode.label,
           css: mode.css
+        }, () => {
+          this.updatePreviewText();
         });
         return;
       }
@@ -130,6 +133,8 @@ export class Home extends React.Component<{}, AppProps> {
       mode: mode.mode,
       label: mode.label,
       css: mode.css
+    }, () => {
+      this.updatePreviewText();
     });
     if (debugMode) {
       console.log("changeMode mode: " + mode.mode)
@@ -159,9 +164,12 @@ export class Home extends React.Component<{}, AppProps> {
   }
 
   updatePreviewText = () => {
-    const preview = document.getElementById("preview");
-    if (preview) {
-      preview.innerHTML = MarkdownParser.render(this.state.text);
+    // Do not update preview text on Edit only mode to improve performance
+    if (!(this.state.mode === 0)) {
+      const preview = document.getElementById("preview");
+      if (preview) {
+        preview.innerHTML = MarkdownParser.render(this.state.text);
+      }
     }
   }
 
