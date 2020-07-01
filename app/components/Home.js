@@ -7,23 +7,22 @@ const SplitMode = 1;
 const PreviewMode = 2;
 
 export default class Home extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.modes = [
-      { mode: EditMode, label: "Edit", css: "edit" },
-      { mode: SplitMode, label: "Split", css: "split" },
-      { mode: PreviewMode, label: "Preview", css: "preview" },
+      { mode: EditMode, label: 'Edit', css: 'edit' },
+      { mode: SplitMode, label: 'Split', css: 'split' },
+      { mode: PreviewMode, label: 'Preview', css: 'preview' },
     ];
 
     this.state = { mode: this.modes[0] };
   }
 
   componentDidMount() {
-    this.simpleMarkdown = document.getElementById("simple-markdown");
-    this.editor = document.getElementById("editor");
-    this.preview = document.getElementById("preview");
+    this.simpleMarkdown = document.getElementById('simple-markdown');
+    this.editor = document.getElementById('editor');
+    this.preview = document.getElementById('preview');
 
     this.configureMarkdown();
     this.connectToBridge();
@@ -35,8 +34,14 @@ export default class Home extends React.Component {
 
     this.scrollTriggers = {};
     this.scrollHandlers = [
-      { el: this.editor, handler: this.scrollHandler(this.editor, this.preview) },
-      { el: this.preview, handler: this.scrollHandler(this.preview, this.editor) }
+      {
+        el: this.editor,
+        handler: this.scrollHandler(this.editor, this.preview),
+      },
+      {
+        el: this.preview,
+        handler: this.scrollHandler(this.preview, this.editor),
+      },
     ];
   }
 
@@ -66,14 +71,14 @@ export default class Home extends React.Component {
   changeMode(mode) {
     this.setState({ mode: mode });
     if (this.note) {
-      this.componentManager.setComponentDataValueForKey("mode", mode.mode);
+      this.componentManager.setComponentDataValueForKey('mode', mode.mode);
     }
   }
 
   configureMarkdown() {
     const markdownitOptions = {
       // automatically render raw links as anchors.
-      linkify: true
+      linkify: true,
     };
 
     this.markdown = MarkdownIt(markdownitOptions)
@@ -82,18 +87,26 @@ export default class Home extends React.Component {
       .use(require('markdown-it-highlightjs'));
 
     // Remember old renderer, if overriden, or proxy to default renderer
-    const defaultRender = this.markdown.renderer.rules.link_open || function (tokens, idx, options, env, self) {
-      return self.renderToken(tokens, idx, options);
-    };
+    const defaultRender =
+      this.markdown.renderer.rules.link_open ||
+      function (tokens, idx, options, env, self) {
+        return self.renderToken(tokens, idx, options);
+      };
 
-    this.markdown.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+    this.markdown.renderer.rules.link_open = function (
+      tokens,
+      idx,
+      options,
+      env,
+      self
+    ) {
       // If you are sure other plugins can't add `target` - drop check below
       var aIndex = tokens[idx].attrIndex('target');
 
       if (aIndex < 0) {
         tokens[idx].attrPush(['target', '_blank']); // add new attribute
       } else {
-        tokens[idx].attrs[aIndex][1] = '_blank';    // replace value of existing attr
+        tokens[idx].attrs[aIndex][1] = '_blank'; // replace value of existing attr
       }
 
       // pass token to default renderer.
@@ -104,12 +117,12 @@ export default class Home extends React.Component {
   connectToBridge() {
     var permissions = [
       {
-        name: "stream-context-item"
-      }
-    ]
+        name: 'stream-context-item',
+      },
+    ];
 
     this.componentManager = new ComponentManager(permissions, () => {
-      var savedMode = this.componentManager.componentDataValueForKey("mode");
+      var savedMode = this.componentManager.componentDataValueForKey('mode');
       if (savedMode) {
         this.setModeFromModeValue(savedMode);
       }
@@ -130,7 +143,6 @@ export default class Home extends React.Component {
       this.editor.value = note.content.text;
       this.preview.innerHTML = this.markdown.render(note.content.text);
     });
-
   }
 
   truncateString(string, limit = 80) {
@@ -140,18 +152,18 @@ export default class Home extends React.Component {
     if (string.length <= limit) {
       return string;
     } else {
-      return string.substring(0, limit) + "...";
+      return string.substring(0, limit) + '...';
     }
   }
 
   updatePreviewText() {
-    var text = this.editor.value || "";
+    var text = this.editor.value || '';
     this.preview.innerHTML = this.markdown.render(text);
     return text;
   }
 
   addChangeListener() {
-    document.getElementById("editor").addEventListener("input", (event) => {
+    document.getElementById('editor').addEventListener('input', (event) => {
       if (this.note) {
         // Be sure to capture this object as a variable, as this.note may be reassigned in `streamContextItem`, so by the time
         // you modify it in the presave block, it may not be the same object anymore, so the presave values will not be applied to
@@ -160,19 +172,25 @@ export default class Home extends React.Component {
 
         this.componentManager.saveItemWithPresave(note, () => {
           note.content.text = this.updatePreviewText();
-          note.content.preview_plain = this.truncateString(this.preview.textContent || this.preview.innerText);
+          note.content.preview_plain = this.truncateString(
+            this.preview.textContent || this.preview.innerText
+          );
           note.content.preview_html = null;
         });
       }
-    })
+    });
   }
 
   addScrollListeners() {
-    this.scrollHandlers.forEach(({ el, handler }) => el.addEventListener('scroll', handler));
+    this.scrollHandlers.forEach(({ el, handler }) =>
+      el.addEventListener('scroll', handler)
+    );
   }
 
   removeScrollListeners() {
-    this.scrollHandlers.forEach(({ el, handler }) => el.removeEventListener('scroll', handler));
+    this.scrollHandlers.forEach(({ el, handler }) =>
+      el.removeEventListener('scroll', handler)
+    );
   }
 
   scrollHandler = (source, destination) => {
@@ -193,16 +211,17 @@ export default class Home extends React.Component {
       frameRequested = true;
 
       window.requestAnimationFrame(() => {
-        var target = event.target
+        var target = event.target;
         var height = target.scrollHeight - target.clientHeight;
         var ratio = parseFloat(target.scrollTop) / height;
-        var move = (destination.scrollHeight - destination.clientHeight) * ratio;
+        var move =
+          (destination.scrollHeight - destination.clientHeight) * ratio;
         destination.scrollTop = move;
 
         frameRequested = false;
       });
-    }
-  }
+    };
+  };
 
   removeSelection() {
     if (window.getSelection) {
@@ -218,19 +237,19 @@ export default class Home extends React.Component {
     var startX;
     var lastDownX;
 
-    var columnResizer = document.getElementById("column-resizer");
+    var columnResizer = document.getElementById('column-resizer');
     var resizerWidth = columnResizer.offsetWidth;
 
     var safetyOffset = 15;
 
-    columnResizer.addEventListener("mousedown", (event) => {
+    columnResizer.addEventListener('mousedown', (event) => {
       pressed = true;
       lastDownX = event.clientX;
-      columnResizer.classList.add("dragging");
-      this.editor.classList.add("no-selection");
-    })
+      columnResizer.classList.add('dragging');
+      this.editor.classList.add('no-selection');
+    });
 
-    document.addEventListener("mousemove", (event) => {
+    document.addEventListener('mousemove', (event) => {
       if (!pressed) {
         return;
       }
@@ -238,24 +257,27 @@ export default class Home extends React.Component {
       var x = event.clientX;
       if (x < resizerWidth / 2 + safetyOffset) {
         x = resizerWidth / 2 + safetyOffset;
-      } else if (x > this.simpleMarkdown.offsetWidth - resizerWidth - safetyOffset) {
+      } else if (
+        x >
+        this.simpleMarkdown.offsetWidth - resizerWidth - safetyOffset
+      ) {
         x = this.simpleMarkdown.offsetWidth - resizerWidth - safetyOffset;
       }
 
       var colLeft = x - resizerWidth / 2;
-      columnResizer.style.left = colLeft + "px";
-      this.editor.style.width = (colLeft - safetyOffset) + "px";
+      columnResizer.style.left = colLeft + 'px';
+      this.editor.style.width = colLeft - safetyOffset + 'px';
 
       this.removeSelection();
-    })
+    });
 
-    document.addEventListener("mouseup", (event) => {
+    document.addEventListener('mouseup', (event) => {
       if (pressed) {
         pressed = false;
-        columnResizer.classList.remove("dragging");
-        this.editor.classList.remove("no-selection");
+        columnResizer.classList.remove('dragging');
+        this.editor.classList.remove('no-selection');
       }
-    })
+    });
   }
 
   addTabHandler() {
@@ -265,15 +287,15 @@ export default class Home extends React.Component {
         event.preventDefault();
 
         // Using document.execCommand gives us undo support
-        if (!document.execCommand("insertText", false, "\t")) {
+        if (!document.execCommand('insertText', false, '\t')) {
           // document.execCommand works great on Chrome/Safari but not Firefox
           var start = this.selectionStart;
           var end = this.selectionEnd;
-          var spaces = "    ";
+          var spaces = '    ';
 
           // Insert 4 spaces
-          this.value = this.value.substring(0, start)
-            + spaces + this.value.substring(end);
+          this.value =
+            this.value.substring(0, start) + spaces + this.value.substring(end);
 
           // Place cursor 4 spaces away from where
           // the tab key was pressed
@@ -285,28 +307,40 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <div id="simple-markdown" className={"sn-component " + this.state.platform}>
+      <div
+        id="simple-markdown"
+        className={'sn-component ' + this.state.platform}
+      >
         <div id="header">
           <div className="segmented-buttons-container sk-segmented-buttons">
             <div className="buttons">
-              {this.modes.map(mode =>
-                <div onClick={() => this.changeMode(mode)} className={"sk-button button " + (this.state.mode == mode ? "selected info" : "sk-secondary-contrast")}>
-                  <div className="sk-label">
-                    {mode.label}
-                  </div>
+              {this.modes.map((mode) => (
+                <div
+                  onClick={() => this.changeMode(mode)}
+                  className={
+                    'sk-button button ' +
+                    (this.state.mode == mode
+                      ? 'selected info'
+                      : 'sk-secondary-contrast')
+                  }
+                >
+                  <div className="sk-label">{mode.label}</div>
                 </div>
-              )}
+              ))}
             </div>
           </div>
         </div>
 
         <div id="editor-container" className={this.state.mode.css}>
-          <textarea dir="auto" id="editor" className={this.state.mode.css}></textarea>
+          <textarea
+            dir="auto"
+            id="editor"
+            className={this.state.mode.css}
+          ></textarea>
           <div id="column-resizer" className={this.state.mode.css}></div>
           <div id="preview" className={this.state.mode.css}></div>
         </div>
       </div>
-    )
+    );
   }
-
 }

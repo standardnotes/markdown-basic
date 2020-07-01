@@ -8,7 +8,7 @@
     "module": "es6", // specifiy module code generation
     "target": "es6", // specify ECMAScript target version
     "jsx": "react", // use typescript to transpile jsx to js
-    "allowJs": true // allow a partial TypeScript and JavaScript codebase
+    //"allowJs": true // allow a partial TypeScript and JavaScript codebase
     //"allowSyntheticDefaultImports": true,
     //"moduleResolution": "node"
   },
