@@ -84,6 +84,17 @@ export class Home extends React.Component<{}, HomeState> {
     this.configureResizer();
   };
 
+  truncateString = (string: string, limit = 80) => {
+    if (!string) {
+      return null;
+    }
+    if (string.length <= limit) {
+      return string;
+    } else {
+      return string.substring(0, limit) + '...';
+    }
+  };
+
   configureEditorKit() {
     const delegate = new EditorKitDelegate({
       setEditorRawText: (text: string) => {
@@ -99,6 +110,17 @@ export class Home extends React.Component<{}, HomeState> {
       },
       clearUndoHistory: () => {},
       getElementsBySelector: () => [] as any,
+      generateCustomPreview: (text: string) => {
+        this.updatePreviewText();
+        const preview = document.getElementById(HtmlElementId.Preview);
+        const previewText = this.truncateString(
+          preview.textContent || preview.innerText
+        );
+        return {
+          html: `<div>${previewText}</div>`,
+          plain: previewText,
+        };
+      },
     });
 
     this.editorKit = new EditorKit({
@@ -138,9 +160,7 @@ export class Home extends React.Component<{}, HomeState> {
       this.setState({
         platform: this.editorKit.internal.componentManager.platform,
       });
-    } finally {
-      return;
-    }
+    } catch {}
   };
 
   setModeFromModeType = (value: ModeType) => {
