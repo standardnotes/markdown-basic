@@ -59,19 +59,13 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: 'dist.css',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new CopyWebpackPlugin({
-      patterns: [
-        { from: './app/index.html', to: 'index.html' },
-        // This is for hosting KaTeX, which we currently don't do:
-        //{from: path.resolve(__dirname, './node_modules/katex/dist'), to: 'katex'},
-      ],
+      patterns: [{ from: './app/index.html', to: 'index.html' }],
     }),
   ],
 };

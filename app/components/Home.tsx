@@ -29,6 +29,11 @@ enum HtmlElementId {
   SimpleMarkdown = 'simple-markdown',
 }
 
+enum CssClassList {
+  Dragging = 'dragging',
+  NoSelection = 'no-selection',
+}
+
 enum ComponentDataKey {
   Mode = 'mode',
 }
@@ -39,7 +44,8 @@ const modes = [
   { type: ModeType.Preview, label: 'Preview', css: 'preview' } as Mode,
 ];
 
-/** MarkdownIt Options:
+/** 
+ * MarkdownIt Options:
  * html option allows inline HTML
  * linkify option automatically renders raw links as anchors
  * breaks option creates new lines without trailing spaces
@@ -108,7 +114,7 @@ export class Home extends React.Component<{}, HomeState> {
           }
         );
       },
-      clearUndoHistory: () => {},
+      clearUndoHistory: () => { },
       getElementsBySelector: () => [] as any,
       generateCustomPreview: (text: string) => {
         this.updatePreviewText();
@@ -160,12 +166,10 @@ export class Home extends React.Component<{}, HomeState> {
       this.setState({
         platform: this.editorKit.internal.componentManager.platform,
       });
-    } catch {}
+    } catch { }
   };
 
   setModeFromModeType = (value: ModeType) => {
-    // Can be refactored to use find
-    // const mode = modes.find // where mode.type = value
     for (const mode of modes) {
       if (mode.type === value) {
         this.logDebugMessage('setModeFromModeType mode: ', mode.type);
@@ -214,14 +218,12 @@ export class Home extends React.Component<{}, HomeState> {
       self: any
     ) {
       // If you are sure other plugins can't add `target` - drop check below
-      let aIndex = tokens[idx].attrIndex('target');
-
+      const aIndex = tokens[idx].attrIndex('target');
       if (aIndex < 0) {
         tokens[idx].attrPush(['target', '_blank']); // add new attribute
       } else {
         tokens[idx].attrs[aIndex][1] = '_blank'; // replace value of existing attr
       }
-
       // pass token to default renderer.
       return defaultRender(tokens, idx, options, env, self);
     };
@@ -247,8 +249,6 @@ export class Home extends React.Component<{}, HomeState> {
     const editor = document.getElementById(HtmlElementId.Editor);
     const columnResizer = document.getElementById(HtmlElementId.ColumnResizer);
     let pressed = false;
-    let startWidth = editor.offsetWidth;
-    let startX;
     let lastDownX;
 
     let resizerWidth = columnResizer.offsetWidth;
@@ -257,8 +257,8 @@ export class Home extends React.Component<{}, HomeState> {
     columnResizer.addEventListener(MouseEvent.Down, (event) => {
       pressed = true;
       lastDownX = event.clientX;
-      columnResizer.classList.add('dragging');
-      editor.classList.add('no-selection');
+      columnResizer.classList.add(CssClassList.Dragging);
+      editor.classList.add(CssClassList.NoSelection);
     });
 
     document.addEventListener(MouseEvent.Move, (event) => {
@@ -273,7 +273,7 @@ export class Home extends React.Component<{}, HomeState> {
         x = simpleMarkdown.offsetWidth - resizerWidth - safetyOffset;
       }
 
-      let colLeft = x - resizerWidth / 2;
+      const colLeft = x - resizerWidth / 2;
       columnResizer.style.left = colLeft + 'px';
       editor.style.width = colLeft - safetyOffset + 'px';
 
@@ -283,11 +283,10 @@ export class Home extends React.Component<{}, HomeState> {
     document.addEventListener(MouseEvent.Up, (event) => {
       if (pressed) {
         pressed = false;
-        columnResizer.classList.remove('dragging');
-        editor.classList.remove('no-selection');
+        columnResizer.classList.remove(CssClassList.Dragging);
+        editor.classList.remove(CssClassList.NoSelection);
       }
     });
-    // At some point we want to remove the EventListers
   };
 
   onKeyDown = (event: React.KeyboardEvent) => {
@@ -308,7 +307,7 @@ export class Home extends React.Component<{}, HomeState> {
 
   logDebugMessage = (message: string, object: any) => {
     if (debugMode) {
-      console.log(message + object);
+      console.log(message, object);
     }
   };
 
