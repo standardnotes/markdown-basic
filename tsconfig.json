@@ -1,16 +1,11 @@
 {
   "compilerOptions": {
-    //"rootDir": "app",
     "outDir": "./dist/", // path to output directory
     "sourceMap": true, // allow sourcemap support
-    //"strictNullChecks": true, // enable strict null checks as a best practice
     "noImplicitAny": true, // disallow implicit any type
     "module": "es6", // specifiy module code generation
     "target": "es6", // specify ECMAScript target version
     "jsx": "react", // use typescript to transpile jsx to js
-    //"allowJs": true // allow a partial TypeScript and JavaScript codebase
-    //"allowSyntheticDefaultImports": true,
-    //"moduleResolution": "node"
   },
   "include": ["./app/"]
 }

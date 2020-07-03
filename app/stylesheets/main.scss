@@ -2,8 +2,6 @@
 @import '~highlightjs_css';
 
 :root {
-  --sn-stylekit-monospace-font: SFMono-Regular, Consolas, Liberation Mono, Menlo,
-    'Ubuntu Mono', courier, monospace;
   --sn-stylekit-font-size-editor: 1.231rem; // Originally 1.21rem. This gives 16px font
 }
 
@@ -34,7 +32,6 @@ html {
   max-height: 100vh;
   flex-direction: column;
   font-size: var(--sn-stylekit-font-size-editor);
-  line-height: 1.5em;
   background-color: var(--sn-stylekit-editor-background-color);
   color: var(--sn-stylekit-editor-foreground-color);
 
@@ -48,9 +45,6 @@ html {
   display: flex;
   flex-direction: row;
   overflow: hidden; // required for footer bar to display in Firefox
-  textarea {
-    line-height: 1.5em;
-  }
 }
 
 #editor {
