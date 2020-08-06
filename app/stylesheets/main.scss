@@ -166,11 +166,11 @@ body, html {
     border-collapse: collapse;
     border-spacing: 0px;
     border-color: var(--sn-stylekit-contrast-border-color);
-    background-color: var(--sn-stylekit-contrast-background-color);
     color: var(--sn-stylekit-contrast-foreground-color);
 
     th, td {
       padding: 6px 13px;
+      background-color: var(--sn-stylekit-contrast-background-color);
       border: 1px solid var(--sn-stylekit-contrast-border-color);
     }
 
