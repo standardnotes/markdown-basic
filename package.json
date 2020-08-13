@@ -19,14 +19,12 @@
     "@babel/plugin-transform-runtime": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
-    "@babel/preset-stage-0": "^7.8.3",
     "@babel/register": "^7.10.5",
     "@babel/runtime": "^7.11.2",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "6.0.3",
     "css-loader": "~4.2.1",
     "highlight.js": "^10.1.2",
-    "husky": "^4.2.5",
     "markdown-it": "^11.0.0",
     "markdown-it-footnote": "^3.0.2",
     "markdown-it-highlightjs": "^3.2.0",
@@ -37,11 +35,18 @@
     "react": "16.x",
     "react-dom": "16.x",
     "sass-loader": "^9.0.3",
-    "sn-components-api": "1.2.8",
+    "sn-editor-kit": "^1.0.6",
     "sn-stylekit": "2.1.0",
+    "source-map-loader": "^1.0.1",
     "style-loader": "~1.2.1",
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
     "webpack": "4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "3.11.0"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.46",
+    "@types/react-dom": "^16.9.8"
   }
 }
