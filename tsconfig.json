@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/", // path to output directory
+    "sourceMap": true, // allow sourcemap support
+    "noImplicitAny": true, // disallow implicit any type
+    "module": "es6", // specifiy module code generation
+    "target": "es6", // specify ECMAScript target version
+    "jsx": "react", // use typescript to transpile jsx to js
+  },
+  "include": ["./app/"]
+}

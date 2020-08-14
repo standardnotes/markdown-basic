@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import ComponentManager from 'sn-components-api';
 const MarkdownIt = require('markdown-it');
 

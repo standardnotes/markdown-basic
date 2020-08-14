@@ -10,7 +10,7 @@ module.exports = {
   },
   devtool: 'cheap-source-map',
   entry: [
-    path.resolve(__dirname, 'app/main.js'),
+    path.resolve(__dirname, 'app/main.tsx'),
     path.resolve(__dirname, 'app/stylesheets/main.scss'),
   ],
   output: {
@@ -45,18 +45,26 @@ module.exports = {
         ],
       },
       {
-        test: /\.js[x]?$/,
-        include: [
-          path.resolve(__dirname, 'app'),
-          path.resolve(__dirname, 'node_modules/sn-components-api/dist/dist.js'),
-        ],
+        test: /\.ts(x?)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
+        use: [
+          {
+            loader: 'ts-loader',
+          }, 
+        ],
+      },
+      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'source-map-loader',
+      },
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css', '.scss'],
+    modules: ['node_modules', path.resolve(__dirname, 'app')],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.scss'],
     alias: {
       highlightjs_css: path.join(__dirname, 'node_modules/highlight.js/styles/atom-one-light.css'),
       stylekit: path.join(__dirname, 'node_modules/sn-stylekit/dist/stylekit.css'),
@@ -71,7 +79,7 @@ module.exports = {
         {
           from: './app/index.html',
           to: 'index.html',
-        },
+        }, 
       ],
     }),
   ],
