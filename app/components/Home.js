@@ -301,7 +301,7 @@ export default class Home extends React.Component {
         </div>
 
         <div id="editor-container" className={this.state.mode.css}>
-          <textarea dir="auto" id="editor" className={this.state.mode.css}></textarea>
+          <textarea dir="auto" id="editor" spellcheck="true" className={this.state.mode.css}></textarea>
           <div id="column-resizer" className={this.state.mode.css}></div>
           <div id="preview" className={this.state.mode.css}></div>
         </div>
