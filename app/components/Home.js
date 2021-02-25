@@ -110,6 +110,7 @@ export default class Home extends React.Component {
 
     this.componentRelay = new ComponentRelay({
       initialPermissions,
+      targetWindow: window,
       onReady: () => {
         const savedMode = this.componentRelay.getComponentDataValueForKey('mode');
         if (savedMode) {
