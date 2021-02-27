@@ -123,12 +123,12 @@ The instructions for local setup can be found [here](https://docs.standardnotes.
 1. Fork the [repository](https://github.com/sn-extensions/markdown-basic) on GitHub
 2. [Clone](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository) your fork of the repository
 3. Type `cd markdown-basic`
-4. Run `npm install` to locally install the packages in `package.json`
+4. Run `yarn` to locally install the packages in `package.json`
 5. Create `ext.json` as shown [here](https://docs.standardnotes.org/extensions/local-setup) with `url: "http://localhost:8004/dist/index.html"`. Optionally, create your `ext.json` as a copy of `ext.json.sample`.
-6. Install http-server using `sudo npm install -g http-server`
-7. Start the server at `http://localhost:8004` using `npm run server`
+6. Install `http-server` using `yarn global add http-server` or `npm install -g http-server`
+7. Start the server at `http://localhost:8004` using `http-server . --cors -p 8004`
 8. Import the extension into the [web](https://app.standardnotes.org) or [desktop](https://standardnotes.org/download) app with `http://localhost:8004/ext.json`.
-9. To build the editor, open another command window and run `npm run build`. For live builds, use `npm run watch`. You can also run `npm run start` and open the editor at `http://localhost:8080`.
+9. To build the editor, open another command window and run `yarn build` or `npm run build`. For live builds, use `yarn watch` or `npm run watch`. You can also run `yarn start` or `npm run start` and open the editor at `http://localhost:8080`.
 
 ## Further Resources
 

@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -48,7 +47,7 @@ module.exports = {
         test: /\.js[x]?$/,
         include: [
           path.resolve(__dirname, 'app'),
-          path.resolve(__dirname, 'node_modules/sn-components-api/dist/dist.js'),
+          path.resolve(__dirname, 'node_modules/@standardnotes/component-relay/dist/dist.js'),
         ],
         exclude: /node_modules/,
         loader: 'babel-loader'
