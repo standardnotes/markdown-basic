@@ -41,7 +41,6 @@
     "markdown-it-task-lists": "^2.1.1",
     "mini-css-extract-plugin": "^0.10.0",
     "node-sass": "^4.14.1",
-    "open-browser-webpack-plugin": "0.0.5",
     "react": "16.x",
     "react-dom": "16.x",
     "sass-loader": "^9.0.3",
